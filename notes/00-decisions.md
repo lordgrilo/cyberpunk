@@ -34,8 +34,34 @@ A running log of design decisions. Newest at the bottom. Keep this updated every
 5. **Workflow.** Everything gets saved as files/notes in this folder (Dropbox-synced) so
    work can continue remotely. Git repo initialized in `consensus/`.
 
+## 2026-07-31 — Design converged (same day, later)
+
+6. **Engine language: Python.** Fastest for Giovanni to hack on; v1 browser runs it
+   behind FastAPI or Pyodide.
+
+7. **Core mechanic: exploit research + rotes** (after two rejected models — see
+   notes/03-casting-rework.md). Reality is a simulated rulebase with hidden, seeded,
+   *typed* seams; player skill is epistemic (hypothesize → experiment → confirm);
+   confirmed seams get composed into reusable role-based **rotes** (dry-run, bind,
+   refine, chain). Character stats = instrumentation resolution only (Arete ladder
+   1–5); understanding is never purchasable.
+
+8. **Heat economy:** local heat (decays), signature heat (never decays → advisory →
+   patch; breaks dependent rotes), personal heat (summons Technocracy). Seams are
+   finite wells priced in usage; the economy self-balances.
+
+9. **AI-GM constitution:** the AI never decides what happens, only what it's like.
+   Engine = outcomes; AI = texture, NPCs, story, fiction→action translation (always
+   echoed back). Codified in PLAY.md.
+
+10. **v0 scope:** engine + one hand-authored venue (residential hotel, ~30 laws, 5–6
+    seams, all 4 seam types) + CLI + PLAY.md + play-in-Claude-Code. Arete 2→3 only.
+    Deferred: generator, Black Ice skin, browser, Arete 1/4/5.
+
+11. **Spec:** docs/superpowers/specs/2026-07-31-consensus-v0-design.md — approved
+    section-by-section in session; awaiting Giovanni's review of the written file.
+
 ## Open questions
 
-- Engine implementation language (TypeScript vs Python) — pending.
-- Exact shape of the spell language (see notes/01-sketches.md, Sketch 1) — to be designed.
-- Scope of v0 scenario (single venue vs small campaign) — pending.
+- None blocking implementation. Next step after spec review: implementation plan
+  (superpowers writing-plans).
