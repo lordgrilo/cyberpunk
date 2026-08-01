@@ -1,0 +1,19 @@
+{
+  "seams": {
+    "S-WITNESS-SCOPE": {
+      "type": "scope_gap",
+      "advisory_at": 2,
+      "patch_at": 3,
+      "advisory": "In the lobby, a new placard appears: SECURITY REVIEW — OPTICAL RECORDS NOW ACCEPTED AS WITNESS STATEMENTS.",
+      "patch_notice": "Every camera in the hotel irises shut, then opens in perfect unison. Reality has revised what counts as a witness."
+    },
+    "S-FIRST-ACCOUNT": {
+      "type": "ordering_bug",
+      "advisory_at": 2,
+      "patch_at": 3,
+      "advisory": "A safety notice slides under the door: INCIDENT ACCOUNTS MUST FOLLOW PHYSICAL INSPECTION.",
+      "patch_notice": "The hotel clocks lose one second together. From now on, impact precedes testimony."
+    }
+  }
+}
+

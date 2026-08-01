@@ -63,5 +63,26 @@ A running log of design decisions. Newest at the bottom. Keep this updated every
 
 ## Open questions
 
-- None blocking implementation. Next step after spec review: implementation plan
-  (superpowers writing-plans).
+- **Blind-playtest calibration.** Does Arete 2 reveal enough to support a hypothesis
+  without naming the answer? This must be tested with a human before expanding the hotel.
+
+## 2026-07-31 — First playable slice
+
+12. **Build the epistemic loop before the content breadth.** Implemented one micro-venue
+    with two contrasting seams, a deterministic data-driven resolver, the eleven-verb
+    mundane action boundary, Arete 2/3 feedback, permanent signature heat, advisories,
+    and live patches. The slice is intentionally smaller than the planned 30-law hotel.
+
+13. **No dependency for the first playtest.** Campaign `.yaml` files currently use JSON
+    syntax (a valid YAML subset) and the standard-library parser. Move to full YAML only
+    when the content authoring benefit justifies adding the dependency.
+
+14. **Do not mistake passing tests for validated design.** Automated checks establish
+    consistent causality; only a blind playtest can establish discovery, surprise, and
+    the feeling of earned magical competence.
+
+15. **The mundane vocabulary must follow ordinary intent.** The first live player tried
+    to take a key and close a book and door; neither action existed in the original
+    eleven-verb surface. Added `take` and `close` rather than forcing those acts through
+    semantically false verbs. A small vocabulary is useful; an artificially complete
+    list chosen before play is not.

@@ -1,0 +1,134 @@
+{
+  "rules": [
+    {
+      "id": "threshold-testimony-buggy",
+      "stratum": "consensus",
+      "trigger": "open",
+      "priority": 10,
+      "when": {
+        "all": [
+          {"fact": "patch.S-WITNESS-SCOPE", "eq": false},
+          {"fact": "target.kind", "eq": "door"},
+          {"fact": "target.locked", "eq": true},
+          {"fact": "observer_count.human", "gt": 0}
+        ]
+      },
+      "effects": [
+        {"op": "set", "path": "target.open", "value": false},
+        {"op": "outcome", "status": "blocked", "message": "The handle turns, but the latch sets itself against you."}
+      ],
+      "instrument": {
+        "arete2": "A hard brass cadence gathers around the latch: the Threshold Testimony has spoken.",
+        "arete3": "Its pressure arrived only after counting awake human witnesses other than the hand on the door."
+      }
+    },
+    {
+      "id": "threshold-testimony-patched",
+      "stratum": "consensus",
+      "trigger": "open",
+      "priority": 10,
+      "when": {
+        "all": [
+          {"fact": "patch.S-WITNESS-SCOPE", "eq": true},
+          {"fact": "target.kind", "eq": "door"},
+          {"fact": "target.locked", "eq": true},
+          {"fact": "observer_count.any", "gt": 0}
+        ]
+      },
+      "effects": [
+        {"op": "set", "path": "target.open", "value": false},
+        {"op": "outcome", "status": "blocked", "message": "The latch holds beneath a newer, colder certainty."}
+      ],
+      "instrument": {
+        "arete2": "The Threshold Testimony speaks in a new voice, bright as a camera flash.",
+        "arete3": "The amended pressure counts any active witness, whether flesh or lens."
+      }
+    },
+    {
+      "id": "impossible-latch-detection",
+      "stratum": "consensus",
+      "trigger": "open",
+      "priority": 100,
+      "when": {
+        "all": [
+          {"fact": "target.kind", "eq": "door"},
+          {"fact": "target.locked", "eq": true},
+          {"fact": "target.open", "eq": true}
+        ]
+      },
+      "effects": [
+        {"op": "outcome", "status": "succeeded", "message": "The locked latch yields as if the word ‘locked’ had briefly lost jurisdiction."},
+        {"op": "heat", "signature": "S-WITNESS-SCOPE", "amount": 1}
+      ],
+      "instrument": {
+        "arete2": "The Threshold Testimony is conspicuously silent; a thin wrongness trails behind the opening.",
+        "arete3": "The enforcement condition found no witness in the category it queried."
+      }
+    },
+    {
+      "id": "first-account",
+      "stratum": "consensus",
+      "trigger": "fall_settlement",
+      "priority": 10,
+      "when": {
+        "all": [
+          {"fact": "patch.S-FIRST-ACCOUNT", "eq": false},
+          {"fact": "event.claim.state", "eq": "intact"},
+          {"fact": "target.fragile", "eq": true},
+          {"fact": "event.height", "gte": 1}
+        ]
+      },
+      "effects": [
+        {"op": "set", "path": "event.stabilized", "value": true},
+        {"op": "set", "path": "target.intact", "value": true},
+        {"op": "outcome", "status": "succeeded", "message": "The cup rocks once on the tile. The fragments your ear promised are nowhere."}
+      ],
+      "instrument": {
+        "arete2": "The First Account fixes the scene with the soft finality of ink drying.",
+        "arete3": "It accepted the earliest spoken condition of the falling object before damage had settled."
+      }
+    },
+    {
+      "id": "impact-due",
+      "stratum": "deep",
+      "trigger": "fall_settlement",
+      "priority": 20,
+      "when": {
+        "all": [
+          {"fact": "target.fragile", "eq": true},
+          {"fact": "event.height", "gte": 1},
+          {"fact": "event.stabilized", "ne": true}
+        ]
+      },
+      "effects": [
+        {"op": "set", "path": "target.intact", "value": false},
+        {"op": "outcome", "status": "succeeded", "message": "Porcelain breaks cleanly across the tile."}
+      ],
+      "instrument": {
+        "arete2": "The Downward Due resolves: height is collected as damage.",
+        "arete3": "It checked fragility and the unpaid fall only after any prior stabilization."
+      }
+    },
+    {
+      "id": "impossible-survival-detection",
+      "stratum": "consensus",
+      "trigger": "fall_settlement",
+      "priority": 100,
+      "when": {
+        "all": [
+          {"fact": "event.stabilized", "eq": true},
+          {"fact": "target.intact", "eq": true},
+          {"fact": "event.height", "gte": 1}
+        ]
+      },
+      "effects": [
+        {"op": "heat", "signature": "S-FIRST-ACCOUNT", "amount": 1}
+      ],
+      "instrument": {
+        "arete2": "A residue of contradiction curls off the intact cup.",
+        "arete3": "Consensus noticed that testimony settled before the impact law ran."
+      }
+    }
+  ]
+}
+

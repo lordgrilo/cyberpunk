@@ -1,6 +1,6 @@
 # CONSENSUS — v0 Design Spec
 
-*2026-07-31 · working title "Consensus" · status: approved design, pre-implementation*
+*2026-07-31 · working title "Consensus" · status: approved design, first playable slice implemented*
 
 ## 1. What this is
 
@@ -91,9 +91,10 @@ distinguish the buggy law from its plausible non-buggy twin.
 ### 3.4 Actions
 
 The player acts **only through the fiction**. A small mundane action vocabulary is the
-engine's entire input surface — for v0 exactly these eleven: `move, place, conceal,
-drop, open, utter, observe, wait, touch, give, time`. Extending the vocabulary is a spec
-change, not an implementation convenience. The
+engine's entire input surface — currently these thirteen: `move, place, conceal, drop,
+open, close, take, utter, observe, wait, touch, give, time`. Extending the vocabulary is
+a spec change, not an implementation convenience. `close` and `take` were added during
+the first live playtest after ordinary player intent exposed their absence. The
 AI-GM translates described acts into actions and **echoes the parse back for confirmation
 before resolution** — auditable, cooperative, no hidden interpretation.
 
@@ -258,5 +259,23 @@ consensus/
 - **AI boundary erosion:** GM improvising outcomes would corrupt the game's objectivity.
   Mitigation: PLAY.md constitution + the engine being the only source of outcome text
   structure.
+
+## 14. First playable slice (implemented 2026-07-31)
+
+The repository now contains a dependency-free deterministic engine, interactive shell,
+GM constitution, and a deliberately tiny Hotel Limen scene. The slice has two seams:
+
+- a scope gap in what the locked-door law counts as a witness;
+- an ordering bug in which the first spoken account of a fall can settle before impact.
+
+Both generate permanent signature heat, issue a diegetic advisory, and patch after loud
+reuse. Seven automated checks cover the two control cases, the two exploits, patching,
+Arete-gated feedback, immutability, and deterministic replay.
+
+This is not yet evidence that the game is fun. It establishes that experiments can yield
+stable, contrasting evidence without AI adjudication. The next acceptance test requires
+a blind human playtest: the player must form a falsifiable hypothesis without reading the
+campaign files. Avoid adding more laws until that test identifies whether feedback is too
+obvious, too obscure, or genuinely satisfying.
 - **Scope creep toward the 3D dream:** v0's only deliverable is a fun loop in text.
   Anything visual is v1+.

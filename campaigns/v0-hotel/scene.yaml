@@ -1,0 +1,159 @@
+{
+  "id": "v0-hotel",
+  "title": "The Service Corridor",
+  "objective": "Open the locked brass service door without a key.",
+  "venue": {
+    "name": "Hotel Limen",
+    "locations": ["service_corridor", "lobby", "stairwell", "fourth_floor_corridor", "records_room", "room_404"]
+  },
+  "entities": {
+    "player": {
+      "name": "you",
+      "kind": "human",
+      "awake": true,
+      "awakened": true,
+      "location": "service_corridor",
+      "observing": []
+    },
+    "porter": {
+      "name": "Mara, the night porter",
+      "kind": "human",
+      "awake": true,
+      "location": "service_corridor",
+      "observing": ["service_door"],
+      "cannot_see": []
+    },
+    "security_camera": {
+      "name": "the brass security camera",
+      "kind": "device",
+      "awake": true,
+      "location": "service_corridor",
+      "observing": ["service_door"],
+      "cannot_see": []
+    },
+    "service_door": {
+      "name": "the brass service door",
+      "kind": "door",
+      "location": "service_corridor",
+      "locked": true,
+      "open": false
+    },
+    "privacy_screen": {
+      "name": "the folding privacy screen",
+      "kind": "object",
+      "portable": true,
+      "location": "service_corridor"
+    },
+    "porcelain_cup": {
+      "name": "the white porcelain cup",
+      "kind": "object",
+      "portable": true,
+      "fragile": true,
+      "intact": true,
+      "height": 2,
+      "location": "service_corridor"
+    },
+    "guest_ledger": {
+      "name": "the guest ledger",
+      "kind": "book",
+      "open": true,
+      "portable": false,
+      "location": "records_room"
+    },
+    "room_404_key": {
+      "name": "the key to Room 404",
+      "kind": "key",
+      "portable": true,
+      "examine": "Your fingertip follows the cuts beneath the fresh 404. Enough of the older engraving survives to read it: 412. No occult pressure accompanies the discovery.",
+      "location": "records_room"
+    },
+    "fourth_floor_camera": {
+      "name": "the fourth-floor lift camera",
+      "kind": "device",
+      "awake": true,
+      "location": "fourth_floor_corridor",
+      "observing": ["room_404_door", "room_412_door"],
+      "cannot_see": []
+    },
+    "room_404_door": {
+      "name": "the door to Room 404",
+      "kind": "door",
+      "location": "fourth_floor_corridor",
+      "locked": true,
+      "open": false,
+      "examine": "Room 404's number plate is newer than the surrounding brasswork; clean screw heads show it was replaced recently."
+    },
+    "room_412_door": {
+      "name": "the door to Room 412",
+      "kind": "door",
+      "location": "fourth_floor_corridor",
+      "locked": true,
+      "open": false,
+      "key_id": "room_404_key",
+      "examine": "Room 412 has an old brass number plate and fresh scratches around its keyway.",
+      "listen": "Behind Room 412's door: low radio static, the careful movement of one person, then sudden stillness as they hear you listening."
+    },
+    "room_412_occupant": {
+      "name": "the occupant of Room 412",
+      "kind": "human",
+      "awake": true,
+      "location": "room_412",
+      "observing": []
+    },
+    "room_404_interior": {
+      "name": "Room 404",
+      "kind": "room_feature",
+      "location": "room_404",
+      "examine": "Room 404 has been cleaned beyond hospitality: vents, drawers, and even screw heads are free of dust. The window is painted plaster behind real curtains. The telephone cable passes through the wall toward Room 412. Only the suitcase and telephone show recent handling."
+    },
+    "room_404_telephone": {
+      "name": "Room 404's hotel telephone",
+      "kind": "device",
+      "location": "room_404",
+      "service_identity": "412",
+      "examine": "The telephone's display says WELCOME TO ROOM 412. Its service circuit identifies the originating room as 412, although the instrument is physically in Room 404."
+    },
+    "nadia_suitcase": {
+      "name": "Nadia Vey's suitcase",
+      "kind": "container",
+      "location": "room_404",
+      "open": false,
+      "portable": true,
+      "contains": ["nadia_passport", "continuity_envelope", "microcassette"],
+      "on_open": "The lid rises without resistance. Inside are precisely folded clothes, Nadia Vey's passport, a sealed Municipal Continuity Office envelope, and a microcassette recorder with its PLAY key held down by tape."
+    },
+    "nadia_passport": {
+      "name": "Nadia Vey's passport",
+      "kind": "document",
+      "portable": true,
+      "concealed": true,
+      "location": "room_404",
+      "examine": "The passport identifies Nadia Vey and bears an ordinary photograph. Its entry stamps end three years ago, although the document was issued only eleven months ago."
+    },
+    "continuity_envelope": {
+      "name": "the sealed Continuity Office envelope",
+      "kind": "document",
+      "portable": true,
+      "concealed": true,
+      "open": false,
+      "location": "room_404",
+      "examine": "The envelope is addressed by hand: TO THE OCCUPANT WHO ARRIVES AFTER NADIA VEY. It remains sealed.",
+      "on_open": "Inside is a Certificate of Administrative Departure for Nadia Vey. It lists physical lodging as 412, consensus lodging as 404, and an effective time of 2 August at 06:10. It authorizes the hotel to accept her vacancy without passage through a public threshold."
+    },
+    "microcassette": {
+      "name": "the taped-down microcassette recorder",
+      "kind": "device",
+      "portable": true,
+      "concealed": true,
+      "location": "room_404",
+      "examine": "The recorder has no batteries, yet its reels are turning slowly. Its tiny speaker emits the same radio static heard at Room 412."
+    },
+    "recorder_detail": {
+      "name": "the recorder's cassette and exposed battery bay",
+      "kind": "clue",
+      "portable": false,
+      "location": "room_404",
+      "examine": "The cassette is labeled LINE TEST: 412→404. Hair-thin copper filaments bridge the empty battery contacts to the telephone cord; the recorder is drawing power from the mirrored line. Beneath the static, Nadia says: The switchboard still answers twelve. That buys an account, not a witness. I need both. A second label reads: IF THE REELS STOP, THE CUTOVER HAS BEGUN."
+    }
+  }
+}
