@@ -123,12 +123,22 @@ Three ledgers as designed (local / signature / personal). In 3D they're *world-v
   the org adapts, not named rivals) [13]. Encounters are systemic cat-and-mouse, not
   boss fights; watching them work teaches you laws you haven't found.
 
-### 4.6 Combat stance [7,14]
+### 4.6 Combat stance [7,14] — RESOLVED 2026-08-01: action-forward mix
 
-Avoidance-first immersive sim: light non-lethal toolkit, execution skill never the wall.
-Failure escalates (heat, patches, Suit attention), it doesn't game-over. The one dread:
-grimoire compromise — a rival or the Suits *stealing understanding* — always story-fuel,
-never deletion. [14]
+Giovanni's call (over the avoidance-first lean): combat is a first-class solution path,
+Deus Ex-style. Consequences folded in:
+
+- **Mundane lane:** guns/melee/light cyber-gadgets with real depth; execution skill is a
+  legitimate lane, with accessibility options so it's never the *only* wall.
+- **Vulgar magic as combat verbs:** any confirmed seam can be *forced* mid-fight —
+  spectacular, instant, heat-ruinous. Combat becomes a consumer of knowledge: the more
+  you understand, the dirtier you fight. [P4 still holds: knowledge multiplies combat,
+  purchases nothing.]
+- **Witness pressure in fights:** every vulgar act in front of witnesses multiplies
+  heat — firefights are where the witness graph gets loud. Fighting the Suits =
+  fighting people who patch the seams you're forcing, live.
+- Failure still escalates rather than game-overs where fiction allows; grimoire
+  compromise remains the true dread. [14]
 
 ### 4.7 The mundane game (the floor everything stands on) [P3, 10]
 
@@ -157,15 +167,14 @@ the two known levers that let small teams ship immersive sims. Stage 1 is
 solo-plus-Claude feasible; Stage 2 is a long solo campaign or a small team; Stage 3 is
 funding-or-years. Every stage is a complete, playable, honest thing.
 
-## 6. Open forks (to resolve before spec rewrite)
+## 6. Forks — RESOLVED 2026-08-01
 
-1. **Perspective:** first-person (Lens-native, immersive-sim lineage, no protagonist
-   animation burden) vs third-person (character fantasy, GTA-feel, costlier). Lean: FP.
-2. **Engine:** Godot 4 (free, light, GDScript≈Python, great for grey-box; C# optional)
-   vs Unity (asset ecosystem, heavier) vs Unreal (the C77 look someday, heaviest now).
-   Lean: Godot for Stages 0-1, revisit at Stage 3.
-3. **Combat stance:** confirm avoidance-first (4.6) vs a more action-forward mix.
-   Lean: avoidance-first.
+1. **Perspective: FIRST-PERSON.** Lens-native, immersive-sim lineage, no protagonist
+   animation burden.
+2. **Engine: GODOT 4** for Stages 0–1 (GDScript≈Python for Giovanni; fastest grey-box
+   iteration; plain-text scenes/scripts = fully AI-collaborable project). Unreal
+   explicitly reconsidered at Stage 3; kernel and design stay engine-portable.
+3. **Combat: ACTION-FORWARD MIX** (Giovanni's call) — see 4.6 for the folded-in design.
 
 ## 7. What survives from the v0 spec
 

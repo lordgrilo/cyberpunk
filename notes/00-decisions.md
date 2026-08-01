@@ -116,10 +116,25 @@ A running log of design decisions. Newest at the bottom. Keep this updated every
 20. **Repo on GitHub:** https://github.com/lordgrilo/cyberpunk — push after every work
     chunk; remote sessions pull before working.
 
-## Open questions (forks before the 3D spec is written)
+## 2026-08-01 — Forks resolved, 3D spec written
 
-- **Perspective:** first-person (Lens-native, immersive-sim lineage, no protagonist
-  animation burden) vs third-person (character fantasy, GTA feel). Lean: FP.
-- **Engine:** Godot 4 vs Unity vs Unreal. Lean: Godot for Stages 0–1, revisit at Stage 3.
-- **Combat stance:** confirm avoidance-first.
-- (Carried) Blind-playtest calibration of Arete 2 — now a Stage 1 question in 3D form.
+21. **First-person.** Lens-native, immersive-sim lineage, no protagonist animation cost.
+
+22. **Godot 4 for Stages 0–1** (Giovanni delegated; confirmed): GDScript≈Python,
+    fastest grey-box iteration, plain-text project fully AI-collaborable. Unreal
+    reconsidered at Stage 3; kernel/content engine-portable by construction.
+
+23. **Action-forward combat (Giovanni's call, over the avoidance lean).** Deus Ex
+    pattern. Folded in: mundane weapon/gadget lane with accessibility toggles; vulgar
+    seam-forcing as combat verb (spectacular, heat-ruinous); witness pressure makes
+    firefights consensus-loud; knowledge multiplies combat, never purchasable damage.
+
+24. **3D spec:** docs/superpowers/specs/2026-08-01-consensus-3d-design.md — twin-kernel
+    architecture (Python testbed + GDScript port, golden JSON fixtures keep lockstep),
+    Stage 1 vertical slice defined (one block, two seams, full glint→patch loop, 6
+    success criteria). v0 spec remains canonical for the kernel internals.
+
+## Open questions
+
+- Giovanni to review the 3D spec file before we write the Stage 1 implementation plan.
+- (Carried) Blind-playtest calibration of Arete 2 — now Stage 1 criterion 2/3.
