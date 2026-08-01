@@ -1,4 +1,11 @@
-# Roadmap — easiest first, without closing the 3D door
+# Roadmap — SUPERSEDED 2026-08-01
+
+> **This staging is superseded by the 3D pivot.** Current staging lives in
+> notes/05-3d-vision.md §5 (Stage 0 kernel testbed → Stage 1 grey-box slice →
+> Stage 2 the Ward → Stage 3 the dream). Kept below for history: the "engine stays
+> headless, visuals are a client" principle carried over unchanged.
+
+# (old) Roadmap — easiest first, without closing the 3D door
 
 Principle: the *system* is the product right now. Visuals are a client. The engine must
 stay headless (a pure library with a clean API + serializable state) so any front-end —

@@ -86,3 +86,40 @@ A running log of design decisions. Newest at the bottom. Keep this updated every
     eleven-verb surface. Added `take` and `close` rather than forcing those acts through
     semantically false verbs. A small vocabulary is useful; an artificially complete
     list chosen before play is not.
+
+## 2026-08-01 — THE 3D PIVOT ("back to the basis")
+
+16. **Giovanni rejected the text-first framing after feeling it in play**: "not good
+    enough… let's plan a whole 3D cool game with cyberrunners… go back and fish game
+    design principles and then let's wrap our game idea around it." The reality-hacking
+    core stays; the product is a 3D game, designed principles-first.
+
+17. **Principles doc:** notes/04-game-design-principles.md — MDA, Koster, flow, SDT,
+    second-order/systemic design, immersive-sim creed, skill taxonomy, loop budget,
+    game feel/legibility, Bushnell's law, open-world lessons, ludonarrative harmony,
+    economy design, failure design — each with "demands of us", plus a
+    tensions-and-rulings section.
+
+18. **3D vision:** notes/05-3d-vision.md — pillars P1–P6; loop budget by timescale; the
+    Ward district (witness graph / belief field / schedules / infrastructure); the Lens
+    (Arete instrumentation as AR perception layers); experiments as physical staging;
+    rotes as AR-ghost spatial choreography; heat/patch made world-visible; the Suits as
+    organizational memory (nemesis-patent-safe); avoidance-first combat; a fully mundane
+    runner floor under everything. Scope ladder: Stage 0 kernel testbed (exists) →
+    Stage 1 grey-box vertical slice (one block, 2 seams) → Stage 2 the Ward →
+    Stage 3 the dream (C77-class art, generator, Black Ice skin).
+
+19. **The v0 kernel survives the pivot whole** (laws, typed seams, heat ledgers, rotes,
+    constitution, grimoire). The text client is demoted to permanent balance testbed.
+    The playable micro-slice from entry 12 is committed as-is and stays runnable.
+
+20. **Repo on GitHub:** https://github.com/lordgrilo/cyberpunk — push after every work
+    chunk; remote sessions pull before working.
+
+## Open questions (forks before the 3D spec is written)
+
+- **Perspective:** first-person (Lens-native, immersive-sim lineage, no protagonist
+  animation burden) vs third-person (character fantasy, GTA feel). Lean: FP.
+- **Engine:** Godot 4 vs Unity vs Unreal. Lean: Godot for Stages 0–1, revisit at Stage 3.
+- **Combat stance:** confirm avoidance-first.
+- (Carried) Blind-playtest calibration of Arete 2 — now a Stage 1 question in 3D form.
