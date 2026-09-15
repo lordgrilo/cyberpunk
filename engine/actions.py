@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from .worldmodel import request_for
+
 
 VERBS = {
     "move",
@@ -35,7 +37,7 @@ def _entity(state: dict[str, Any], entity_id: str | None) -> dict[str, Any]:
 def prepare(
     state: dict[str, Any], action: dict[str, Any], result: dict[str, Any]
 ) -> list[dict[str, Any]]:
-    """Apply mundane state changes and return immediate engine events."""
+    """Apply mundane state changes and return adjudication requests."""
     verb = action.get("verb")
     if verb not in VERBS:
         raise InvalidAction(f"verb must be one of: {', '.join(sorted(VERBS))}")
@@ -43,7 +45,7 @@ def prepare(
     actor_id = action.get("actor", "player")
     actor = _entity(state, actor_id)
     target_id = action.get("target")
-    events: list[dict[str, Any]] = []
+    requests: list[dict[str, Any]] = []
 
     if verb == "open":
         target = _entity(state, target_id)
@@ -53,15 +55,23 @@ def prepare(
             result["observations"].append(f"{target['name']} is already open.")
             result["status"] = "unchanged"
             return []
-        target["open"] = True
-        for contained_id in target.get("contains", []):
-            contained = state["entities"].get(contained_id)
-            if contained:
-                contained["concealed"] = False
-        if target.get("on_open"):
-            result["observations"].append(target["on_open"])
         if target.get("kind") == "door":
-            events.append({"type": "open", "actor": actor_id, "target": target_id})
+            # A threshold is consensus-governed: propose the opening, never commit it.
+            requests.append(
+                request_for(
+                    state,
+                    {"type": "open", "actor": actor_id, "target": target_id},
+                    proposal={"open": True},
+                )
+            )
+        else:
+            target["open"] = True
+            for contained_id in target.get("contains", []):
+                contained = state["entities"].get(contained_id)
+                if contained:
+                    contained["concealed"] = False
+            if target.get("on_open"):
+                result["observations"].append(target["on_open"])
 
     elif verb == "close":
         target = _entity(state, target_id)
@@ -123,7 +133,6 @@ def prepare(
                 "target": target_id,
                 "height": height,
                 "due": state["tick"] + 1,
-                "stabilized": False,
             }
         )
         result["observations"].append(
@@ -152,7 +161,8 @@ def prepare(
         for pending in state["pending"]:
             (due if pending["due"] <= state["tick"] else future).append(pending)
         state["pending"] = future
-        events.extend(due)
+        for settlement in due:
+            requests.append(request_for(state, settlement, proposal={"_stabilized": False}))
         if not due:
             result["observations"].append("A quiet beat passes.")
 
@@ -181,21 +191,27 @@ def prepare(
         recipient = _entity(state, recipient_id)
         target["owner"] = recipient_id
         target["location"] = recipient["location"]
-        events.append(
-            {"type": "give", "actor": actor_id, "target": target_id, "recipient": recipient_id}
+        requests.append(
+            request_for(
+                state,
+                {"type": "give", "actor": actor_id, "target": target_id, "recipient": recipient_id},
+            )
         )
 
     elif verb == "touch":
         target = _entity(state, target_id)
         if action.get("manner") != "knock" and target.get("examine"):
             result["observations"].append(target["examine"])
-        events.append(
-            {
-                "type": "touch",
-                "actor": actor_id,
-                "target": target_id,
-                "manner": action.get("manner", "touch"),
-            }
+        requests.append(
+            request_for(
+                state,
+                {
+                    "type": "touch",
+                    "actor": actor_id,
+                    "target": target_id,
+                    "manner": action.get("manner", "touch"),
+                },
+            )
         )
 
-    return events
+    return requests

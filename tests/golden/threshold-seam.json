@@ -1,0 +1,91 @@
+{
+  "seam": "S-WITNESS-SCOPE",
+  "note": "Frozen Gate 0 contract. Any kernel in any language must reproduce these exactly. The witness list is supplied by the world model (text engine now, Godot later); the kernel never derives it.",
+  "cases": [
+    {
+      "name": "direct-sight-witness-blocks-locked-door",
+      "request": {
+        "event": {"type": "open", "actor": "player", "target": "service_door"},
+        "subject": {"kind": "door", "access_state": "locked"},
+        "proposal": {"open": true},
+        "witnesses": [{"observer": "porter", "modality": "direct_sight"}],
+        "consensus": {"arete": 2, "patches": [], "signatures": {}}
+      },
+      "expect": {
+        "status": "blocked",
+        "outcome": {"open": false},
+        "anomaly": false,
+        "fired_rules": ["threshold-testimony-buggy"],
+        "heat": {}
+      }
+    },
+    {
+      "name": "optical-record-alone-does-not-count-before-patch",
+      "request": {
+        "event": {"type": "open", "actor": "player", "target": "service_door"},
+        "subject": {"kind": "door", "access_state": "locked"},
+        "proposal": {"open": true},
+        "witnesses": [{"observer": "corridor_camera", "modality": "optical_record"}],
+        "consensus": {"arete": 2, "patches": [], "signatures": {}}
+      },
+      "expect": {
+        "status": "succeeded",
+        "outcome": {"open": true},
+        "anomaly": true,
+        "fired_rules": ["impossible-latch-detection"],
+        "heat": {"S-WITNESS-SCOPE": 1}
+      }
+    },
+    {
+      "name": "unwitnessed-locked-door-opens-as-anomaly",
+      "request": {
+        "event": {"type": "open", "actor": "player", "target": "service_door"},
+        "subject": {"kind": "door", "access_state": "locked"},
+        "proposal": {"open": true},
+        "witnesses": [],
+        "consensus": {"arete": 2, "patches": [], "signatures": {}}
+      },
+      "expect": {
+        "status": "succeeded",
+        "outcome": {"open": true},
+        "anomaly": true,
+        "fired_rules": ["impossible-latch-detection"],
+        "heat": {"S-WITNESS-SCOPE": 1}
+      }
+    },
+    {
+      "name": "optical-record-counts-after-patch",
+      "request": {
+        "event": {"type": "open", "actor": "player", "target": "service_door"},
+        "subject": {"kind": "door", "access_state": "locked"},
+        "proposal": {"open": true},
+        "witnesses": [{"observer": "corridor_camera", "modality": "optical_record"}],
+        "consensus": {"arete": 2, "patches": ["S-WITNESS-SCOPE"], "signatures": {"S-WITNESS-SCOPE": 3}}
+      },
+      "expect": {
+        "status": "blocked",
+        "outcome": {"open": false},
+        "anomaly": false,
+        "fired_rules": ["threshold-testimony-patched"],
+        "heat": {}
+      }
+    },
+    {
+      "name": "unlocked-door-is-mundane-and-draws-no-law",
+      "request": {
+        "event": {"type": "open", "actor": "player", "target": "guest_door"},
+        "subject": {"kind": "door", "access_state": "unlocked"},
+        "proposal": {"open": true},
+        "witnesses": [{"observer": "porter", "modality": "direct_sight"}],
+        "consensus": {"arete": 2, "patches": [], "signatures": {}}
+      },
+      "expect": {
+        "status": "succeeded",
+        "outcome": {"open": true},
+        "anomaly": false,
+        "fired_rules": [],
+        "heat": {}
+      }
+    }
+  ]
+}

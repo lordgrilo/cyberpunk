@@ -8,18 +8,18 @@
       "when": {
         "all": [
           {"fact": "patch.S-WITNESS-SCOPE", "eq": false},
-          {"fact": "target.kind", "eq": "door"},
-          {"fact": "target.locked", "eq": true},
-          {"fact": "observer_count.human", "gt": 0}
+          {"fact": "subject.kind", "eq": "door"},
+          {"fact": "subject.access_state", "eq": "locked"},
+          {"fact": "witness_count.direct_sight", "gt": 0}
         ]
       },
       "effects": [
-        {"op": "set", "path": "target.open", "value": false},
+        {"op": "set", "path": "proposal.open", "value": false},
         {"op": "outcome", "status": "blocked", "message": "The handle turns, but the latch sets itself against you."}
       ],
       "instrument": {
         "arete2": "A hard brass cadence gathers around the latch: the Threshold Testimony has spoken.",
-        "arete3": "Its pressure arrived only after counting awake human witnesses other than the hand on the door."
+        "arete3": "Its pressure arrived only after counting witnesses of direct sight, and no other kind."
       }
     },
     {
@@ -30,18 +30,18 @@
       "when": {
         "all": [
           {"fact": "patch.S-WITNESS-SCOPE", "eq": true},
-          {"fact": "target.kind", "eq": "door"},
-          {"fact": "target.locked", "eq": true},
-          {"fact": "observer_count.any", "gt": 0}
+          {"fact": "subject.kind", "eq": "door"},
+          {"fact": "subject.access_state", "eq": "locked"},
+          {"fact": "witness_count.any", "gt": 0}
         ]
       },
       "effects": [
-        {"op": "set", "path": "target.open", "value": false},
+        {"op": "set", "path": "proposal.open", "value": false},
         {"op": "outcome", "status": "blocked", "message": "The latch holds beneath a newer, colder certainty."}
       ],
       "instrument": {
         "arete2": "The Threshold Testimony speaks in a new voice, bright as a camera flash.",
-        "arete3": "The amended pressure counts any active witness, whether flesh or lens."
+        "arete3": "The amended pressure counts any witness, whatever modality carried it."
       }
     },
     {
@@ -51,9 +51,9 @@
       "priority": 100,
       "when": {
         "all": [
-          {"fact": "target.kind", "eq": "door"},
-          {"fact": "target.locked", "eq": true},
-          {"fact": "target.open", "eq": true}
+          {"fact": "subject.kind", "eq": "door"},
+          {"fact": "subject.access_state", "eq": "locked"},
+          {"fact": "proposal.open", "eq": true}
         ]
       },
       "effects": [
@@ -74,13 +74,13 @@
         "all": [
           {"fact": "patch.S-FIRST-ACCOUNT", "eq": false},
           {"fact": "event.claim.state", "eq": "intact"},
-          {"fact": "target.fragile", "eq": true},
+          {"fact": "subject.fragile", "eq": true},
           {"fact": "event.height", "gte": 1}
         ]
       },
       "effects": [
-        {"op": "set", "path": "event.stabilized", "value": true},
-        {"op": "set", "path": "target.intact", "value": true},
+        {"op": "set", "path": "proposal._stabilized", "value": true},
+        {"op": "set", "path": "proposal.intact", "value": true},
         {"op": "outcome", "status": "succeeded", "message": "The cup rocks once on the tile. The fragments your ear promised are nowhere."}
       ],
       "instrument": {
@@ -95,13 +95,13 @@
       "priority": 20,
       "when": {
         "all": [
-          {"fact": "target.fragile", "eq": true},
+          {"fact": "subject.fragile", "eq": true},
           {"fact": "event.height", "gte": 1},
-          {"fact": "event.stabilized", "ne": true}
+          {"fact": "proposal._stabilized", "ne": true}
         ]
       },
       "effects": [
-        {"op": "set", "path": "target.intact", "value": false},
+        {"op": "set", "path": "proposal.intact", "value": false},
         {"op": "outcome", "status": "succeeded", "message": "Porcelain breaks cleanly across the tile."}
       ],
       "instrument": {
@@ -116,8 +116,8 @@
       "priority": 100,
       "when": {
         "all": [
-          {"fact": "event.stabilized", "eq": true},
-          {"fact": "target.intact", "eq": true},
+          {"fact": "proposal._stabilized", "eq": true},
+          {"fact": "proposal.intact", "eq": true},
           {"fact": "event.height", "gte": 1}
         ]
       },
@@ -131,4 +131,3 @@
     }
   ]
 }
-

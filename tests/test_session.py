@@ -109,9 +109,14 @@ class RealityEngineTests(unittest.TestCase):
         self.assertEqual([], before["history"])
 
     def test_arete_three_adds_condition_trace(self):
-        state = new_game(self.campaign, arete=3)
-        result = act(state, {"verb": "open", "target": "service_door"}, self.campaign)
-        self.assertTrue(any("awake human witnesses" in signal for signal in result["public"]["signals"]))
+        action = {"verb": "open", "target": "service_door"}
+        attribution = act(new_game(self.campaign, arete=2), action, self.campaign)
+        introspection = act(new_game(self.campaign, arete=3), action, self.campaign)
+        law = next(r for r in self.campaign["rules"] if r["id"] == "threshold-testimony-buggy")
+        self.assertEqual(
+            attribution["public"]["signals"] + [law["instrument"]["arete3"]],
+            introspection["public"]["signals"],
+        )
 
     def test_take_moves_an_item_with_its_carrier(self):
         self.state["entities"]["player"]["location"] = "records_room"

@@ -138,3 +138,45 @@ A running log of design decisions. Newest at the bottom. Keep this updated every
 
 - Giovanni to review the 3D spec file before we write the Stage 1 implementation plan.
 - (Carried) Blind-playtest calibration of Arete 2 — now Stage 1 criterion 2/3.
+
+## 2026-09-15 — Gate 0 built (kernel/world-model split)
+
+25. **The kernel no longer owns the world.** `adjudicate(request, campaign)` is a pure
+    function of a self-describing request: `event`, `subject` (claim-shaped facts),
+    `proposal` (the outcome under adjudication), `witnesses` (evidence records with
+    modality), `consensus` (arete/patches/signatures). It returns deltas — it never
+    mutates the request and never writes world state.
+
+26. **Geometry moved out to `engine/worldmodel.py`.** The old `observer_count` fact
+    walked every entity checking location, `observing`, `cannot_see` and `awake`. That
+    logic is now the world model's job — the text engine today, Godot tomorrow. The
+    kernel only counts witnesses it was handed, so it cannot reason about wakefulness or
+    sightlines even by accident.
+
+27. **Witnesses carry modality, not species.** `observer_count.human` became
+    `witness_count.direct_sight`; `kind: device` observers produce `optical_record`.
+    This states the scope-gap seam in its true terms: the buggy law queries the wrong
+    *evidence modality*, which is exactly what Gate 2's cameras and Gate 3's port need.
+
+28. **`rules.py` is now a generic matcher** parameterised by a fact resolver; it knows
+    how to compare facts, not what any fact means. Effects may only amend the proposal;
+    keys prefixed `_` (e.g. `_stabilized`) are adjudication-internal and are never
+    committed to entities.
+
+29. **Five golden fixtures frozen** in `tests/golden/threshold-seam.json` as
+    language-neutral JSON: enforcement, the seam, the unwitnessed baseline, post-patch
+    behaviour, and an unlocked-door negative control. These are the lockstep contract the
+    GDScript kernel must satisfy at Gate 3.
+
+30. **A brittle test was rewritten, not deleted.** `test_arete_three_adds_condition_trace`
+    asserted on the literal phrase "awake human witnesses"; since the kernel no longer
+    knows about wakefulness, that prose would now be a lie. It now asserts the behaviour:
+    Arete 3 returns Arete 2's signals plus the law's introspection trace.
+
+**Status:** 17 tests + 5 golden subtests green; the text slice runs unchanged. Gate 0's
+pass condition is met — a door resolves from a supplied human/camera snapshot with no
+geometry or narrative code in the kernel.
+
+**Not yet done from Gate 0's bullet list:** the full eight-phase lifecycle is only
+partly explicit (PROPOSE / ADJUDICATE / COMMIT are real; INTENT, CONTEXT, REACT and
+SETTLE remain implicit in the caller). The network and authority graphs are Gate 2.
